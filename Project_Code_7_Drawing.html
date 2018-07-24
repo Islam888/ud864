@@ -188,10 +188,15 @@
 
         // Initialize the drawing manager.
         var drawingManager = new google.maps.drawing.DrawingManager({
+          //the shape of the drawing
           drawingMode: google.maps.drawing.OverlayType.POLYGON,
+          //to choose to add a control or not
           drawingControl: true,
+          //the drawing control
           drawingControlOptions: {
+            //its position
             position: google.maps.ControlPosition.TOP_LEFT,
+            //rectangle, polygon,..
             drawingModes: [
               google.maps.drawing.OverlayType.POLYGON
             ]
@@ -199,11 +204,11 @@
         });
 
         // Style the markers a bit. This will be our listing marker icon.
-        var defaultIcon = makeMarkerIcon('0091ff');
+        var defaultIcon = makeMarkerIcon('0ee');
 
         // Create a "highlighted location" marker color for when the user
         // mouses over the marker.
-        var highlightedIcon = makeMarkerIcon('FFFF24');
+        var highlightedIcon = makeMarkerIcon('FF0000');
 
         // The following group uses the location array to create an array of markers on initialize.
         for (var i = 0; i < locations.length; i++) {
@@ -212,8 +217,8 @@
           var title = locations[i].title;
           // Create a marker per location, and put into markers array.
           var marker = new google.maps.Marker({
-            position: position,
-            title: title,
+            position,
+            title,
             animation: google.maps.Animation.DROP,
             icon: defaultIcon,
             id: i
@@ -261,6 +266,8 @@
           // Make sure the search is re-done if the poly is changed.
           polygon.getPath().addListener('set_at', searchWithinPolygon);
           polygon.getPath().addListener('insert_at', searchWithinPolygon);
+          var area = google.maps.geometry.spherical.computeArea(polygon.getPath());
+          window.alert(area + ' square meters');
         });
       }
 
@@ -369,10 +376,9 @@
       }
     </script>
 
-    <script async defer
+<script async defer
         src=
-        "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=MYAPIKEY&v=3&callback=initMap">
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLgAmdZmi8GXGUAasIOWJ-cbYhuoXkyE&libraries=drawing,geometry&v=3&callback=initMap">
     </script>
-
   </body>
 </html>

@@ -44,16 +44,16 @@
         var largeInfowindow = new google.maps.InfoWindow();
         var bounds = new google.maps.LatLngBounds();
 
-        // The following group uses the location array to create an array of markers on initialize.
+        // The following group uses the locations array to create an array of markers on initialize.
         for (var i = 0; i < locations.length; i++) {
           // Get the position from the location array.
           var position = locations[i].location;
           var title = locations[i].title;
           // Create a marker per location, and put into markers array.
           var marker = new google.maps.Marker({
-            map: map,
-            position: position,
-            title: title,
+            map,
+            position,
+            title,
             animation: google.maps.Animation.DROP,
             id: i
           });
@@ -75,6 +75,7 @@
       function populateInfoWindow(marker, infowindow) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
+          console.log(infowindow.marker, marker)
           infowindow.marker = marker;
           infowindow.setContent('<div>' + marker.title + '</div>');
           infowindow.open(map, marker);
@@ -87,7 +88,7 @@
     </script>
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=MYAPIKEY&v=3&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLgAmdZmi8GXGUAasIOWJ-cbYhuoXkyE&v=3&callback=initMap">
     </script>
 
   </body>
